@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="header" class="bg-primary">
-        <span class="logo" style="color: brown;">Bookmarks</span>
+        <span class="logo" style="color:darkblue;">Bookmarks</span>
         {% if request.user.is_authenticated %}
         <ul class="menu">
             <li {% if section == "dashboard" %}class="selected"{% endif %}>
@@ -31,9 +31,10 @@
  <span class="user">
  {% if request.user.is_authenticated %}
  Hello {{ request.user.first_name }},
- <a href="{% url 'logout' %}">Logout</a>
+ <a href="{% url 'logout' %}" style="color:rgb(236, 109, 109); font-size: 15px;">Logout</a>
  {% else %}
- <a href="{% url 'login' %}">Log-in</a>
+ <a href="{% url 'login' %}" style="color:rgb(236, 109, 109); font-size: 15px;">Log-in</a>
+ <!-- <a href="{% url 'password_reset' %}" style="color:blanchedalmond;">Forget-password</a> -->
  {% endif %}
  </span>
     </div>

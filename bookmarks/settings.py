@@ -133,3 +133,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #LOGIN_URL = reverse_lazy('login')
 #LOGOUT_URL = reverse_lazy('logout')
 LOGIN_REDIRECT_URL ="/account/"
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
