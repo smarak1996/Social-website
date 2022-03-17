@@ -8,8 +8,7 @@
     Please try again.
  </p>
  {% else %}
- <p>Please, use the following form to log-in:</p>
- {% endif %}
+ <p>Please, use the following form to log-in. If you don't have an account <a href="{% url 'register' %}">register here</a></p>
  <div class="login-form">
     <form action="{% url 'login' %}" method="POST">
         {{ form.as_p }}
@@ -19,4 +18,14 @@
     </form>
     <p><a href="{% url 'password_reset' %}">Forgotten your password?</a></p>
 </div>
+{% endif %}
+
+</div>
+<div class="social" style="margin-right: 20px;">
+    <ul>
+    <li class="facebook"><a href="{% url 'social:begin' 'facebook' %}" >Login with Facebook</a></li>
+    <li class="twitter"><a href="#">Login with Twitter</a></li>
+    <li class="google"><a href="#">Login with Google</a></li>
+</ul>
+    </div>
    {% endblock %}
