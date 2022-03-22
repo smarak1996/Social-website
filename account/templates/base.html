@@ -10,30 +10,28 @@
 </head>
 <body>
     <div id="header" class="bg-primary">
-        <span class="logo" style="color:darkblue;">Bookmarks</span>
+        <span class="logo" style="color:rgb(230, 171, 222); font-weight: 600; font-family: cooper;">Bookmarks</span>
         {% if request.user.is_authenticated %}
         <ul class="menu">
             <li {% if section == "dashboard" %}class="selected"{% endif %}>
                 <a href="{% url 'dashboard' %}">My dashboard</a>
             </li>
             <li {% if section == "images" %}class="selected"{% endif %}>
-                <a href="#">Images</a>
+                <a href="{% url 'images:list' %}">Images</a>
+
             </li>
             <li {% if section == "people" %}class="selected"{% endif %}>
                 <a href="#">People</a>
             </li>
-            <!-- <li {% if section == "password" %}class="selected nav-item"{% endif %}>
-                <a  href="{% url 'password_change' %}">Password_Change</a>
-            </li> -->
         </ul>
         {% endif %}
  
  <span class="user">
  {% if request.user.is_authenticated %}
  Hello {{ request.user.first_name }},
- <a href="{% url 'logout' %}" style="color:rgb(224, 75, 5); font-size: 15px;font-weight: 600;">Logout</a>
+ <a href="{% url 'logout' %}" style="color:rgb(226, 241, 12); font-size: 15px;font-weight: 600;">Logout</a>
  {% else %}
- <a href="{% url 'login' %}" style="color:rgb(224, 75, 5); font-size: 15px;font-weight: 600;">Log-in</a>
+ <a href="{% url 'login' %}" style="color:rgb(226, 241, 12); font-size: 15px;font-weight: 600;">Log-in</a>
  <!-- <a href="{% url 'password_reset' %}" style="color:blanchedalmond;">Forget-password</a> -->
  {% endif %}
  </span>
@@ -54,5 +52,27 @@
 
         {% endblock %}
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src=" http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>
+
+    <script>
+        
+        var csrftoken = $.cookie('csrftoken');
+        console.log(csrftoken)
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }   
+        });
+    </script>
+    {% block domready %}
+
+    {% endblock %}
 </body>
 </html>
