@@ -6,6 +6,7 @@ from django.urls import reverse
 class Image(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='images_created', on_delete= models.CASCADE)
     users_like = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='images_liked',blank=True)
+    total_likes = models.PositiveIntegerField(db_index=True, default=0)
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200,blank=True)
     url = models.URLField()

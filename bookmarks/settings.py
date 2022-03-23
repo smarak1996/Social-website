@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
     'social_django',
     'sorl.thumbnail',
+    'actions',
 ]
 
 MIDDLEWARE = [
@@ -147,7 +148,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 AUTHENTICATION_BACKENDS = (
  'django.contrib.auth.backends.ModelBackend',
  'account.authentication.EmailAuthBackend',
- #'social.backends.facebook.Facebook2OAuth2',
  'social_core.backends.facebook.FacebookOAuth2',
  
 )
@@ -155,3 +155,12 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_FACEBOOK_KEY = '1362928410848830'
 SOCIAL_AUTH_FACEBOOK_SECRET = '7d73c45fbef3363c0889c76375fbcf47'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+from django.urls import reverse
+ABSOLUTE_URL_OVERRIDES = {
+'auth.user': lambda u: reverse('user_detail',args=[u.username])
+}
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
